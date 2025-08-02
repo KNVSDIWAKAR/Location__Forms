@@ -5,7 +5,13 @@ const { Parser } = require("json2csv");
 const app = express();
 
 // Middleware
-app.use(cors());
+app.use(
+  cors({
+    origin: "*",
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
 app.use(express.json());
 
 // MongoDB connection
@@ -29,10 +35,12 @@ const Entry = mongoose.model("Entry", entrySchema);
 // POST new entry
 app.post("/api/entries", async (req, res) => {
   try {
+    console.log("Received request:", req.body); // 👈 add this
     const newEntry = new Entry(req.body);
     await newEntry.save();
     res.status(201).json({ message: "Entry saved" });
   } catch (err) {
+    console.error("Error saving entry:", err); // 👈 log full error
     res.status(500).json({ error: "Failed to save entry" });
   }
 });
@@ -41,6 +49,12 @@ app.post("/api/entries", async (req, res) => {
 app.get("/api/download/SE@2025", async (req, res) => {
   try {
     const entries = await Entry.find({});
+    console.log("Entries fetched:", entries.length);
+
+    if (!entries || entries.length === 0) {
+      return res.status(404).json({ error: "No entries to export" });
+    }
+
     const fields = [
       "danushId",
       "wdCode",
@@ -57,6 +71,7 @@ app.get("/api/download/SE@2025", async (req, res) => {
     res.attachment("entries.csv");
     return res.send(csv);
   } catch (err) {
+    console.error("CSV generation error:", err);
     res.status(500).json({ error: "Failed to generate CSV" });
   }
 });
