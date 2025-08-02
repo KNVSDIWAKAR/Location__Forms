@@ -35,8 +35,10 @@ connectDB();
 const entrySchema = new mongoose.Schema({
   danushId: String,
   wdCode: String,
+  outletName: String,
   raType: String,
-  payout: Number,
+  ipType: String,
+  payout: String,
   grantLocation: String,
   latitude: Number,
   longitude: Number,
@@ -69,7 +71,9 @@ app.get("/api/download/SE@2025", async (req, res) => {
     const fields = [
       "danushId",
       "wdCode",
+      "outletName",
       "raType",
+      "ipType",
       "payout",
       "grantLocation",
       "latitude",

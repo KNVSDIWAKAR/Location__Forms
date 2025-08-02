@@ -6,7 +6,9 @@ function GrantLocationForm() {
   const [formData, setFormData] = useState({
     danushId: "",
     wdCode: "",
+    outletName: "",
     raType: "",
+    ipType: "",
     payout: "",
     grantLocation: "",
     latitude: "",
@@ -53,7 +55,9 @@ function GrantLocationForm() {
       setFormData({
         danushId: "",
         wdCode: "",
+        outletName: "",
         raType: "",
+        ipType: "",
         payout: "",
         grantLocation: "",
         latitude: "",
@@ -84,9 +88,23 @@ function GrantLocationForm() {
           required
         />
         <input
+          name="outletName"
+          placeholder="outletName"
+          value={formData.outletName}
+          onChange={handleChange}
+          required
+        />
+        <input
           name="raType"
           placeholder="RA Type"
           value={formData.raType}
+          onChange={handleChange}
+          required
+        />
+        <input
+          name="ipType"
+          placeholder="ipType"
+          value={formData.ipType}
           onChange={handleChange}
           required
         />
