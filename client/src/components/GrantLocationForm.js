@@ -46,7 +46,7 @@ function GrantLocationForm() {
     e.preventDefault();
     try {
       await axios.post(
-        "https://itc-location-forms-server.vercel.app/api/entries",
+        "https://location-forms.vercel.app/api/entries",
         formData
       );
       alert("Form submitted!");
