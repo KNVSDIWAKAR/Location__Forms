@@ -3,6 +3,9 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const { Parser } = require("json2csv");
 const app = express();
+const dotenv = require("dotenv");
+
+dotenv.config();
 
 // Middleware
 app.use(
@@ -16,7 +19,7 @@ app.use(express.json());
 
 // MongoDB connection
 mongoose
-  .connect("mongodb+srv://divvukancherla630:12345@cluster0.ndvsjgf.mongodb.net")
+  .connect(process.env.MONGODB_URI)
   .then(() => console.log("Connected to MongoDB"))
   .catch((err) => console.error("MongoDB connection error:", err));
 
@@ -80,6 +83,9 @@ app.get("/api/download/SE@2025", async (req, res) => {
 app.get("/", (req, res) => {
   res.send("Server is Up");
 });
+// app.listen(5000, () => {
+//   console.log("Server running on http://localhost:5000");
+// });
 
 // For Vercel deployment
 module.exports = app;
