@@ -48,6 +48,7 @@ const Entry = mongoose.model("Entry", entrySchema);
 // POST new entry
 app.post("/api/entries", async (req, res) => {
   try {
+    connectDB();
     console.log("Received request:", req.body); // 👈 add this
     const newEntry = new Entry(req.body);
     await newEntry.save();
@@ -61,6 +62,7 @@ app.post("/api/entries", async (req, res) => {
 // GET download as CSV (secret URL)
 app.get("/api/download/SE@2025", async (req, res) => {
   try {
+    connectDB();
     const entries = await Entry.find({});
     console.log("Entries fetched:", entries.length);
 
