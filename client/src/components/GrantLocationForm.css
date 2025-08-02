@@ -1,0 +1,36 @@
+.form-container {
+  max-width: 500px;
+  margin: auto;
+  padding: 1rem;
+  border-radius: 8px;
+  background-color: #f4f4f4;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+input,
+select,
+button {
+  margin: 10px 0;
+  padding: 10px;
+  font-size: 1rem;
+}
+
+button {
+  background-color: #1976d2;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #135ba1;
+}
+
+h2 {
+  text-align: center;
+}
